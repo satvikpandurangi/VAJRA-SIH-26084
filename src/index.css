@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  
+  html, body {
+    background-color: #070B14;
+    color: #F1F5F9;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* Custom high-performance dark scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #070B14;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1F3864;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #F28C28;
+  }
+}
+
+/* Glassmorphism utility helpers */
+.glass-panel {
+  background: rgba(14, 22, 38, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-subtle {
+  background: rgba(17, 28, 48, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-dropdown {
+  background: rgba(10, 17, 30, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.7);
+}
+
+/* Hatching pattern for satellite-only lower confidence zone */
+.satellite-hatch {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.03) 8px,
+    rgba(0, 0, 0, 0.15) 8px,
+    rgba(0, 0, 0, 0.15) 16px
+  );
+}
+
+/* Radar dBZ Colormap legend styling */
+.dbz-gradient {
+  background: linear-gradient(
+    to right,
+    #00ffff 0%,   /* 15 dBZ */
+    #0099ff 20%,  /* 25 dBZ */
+    #00cc00 35%,  /* 35 dBZ */
+    #ffff00 50%,  /* 42 dBZ */
+    #ff9900 65%,  /* 50 dBZ */
+    #ff0000 80%,  /* 58 dBZ */
+    #cc00ff 92%,  /* 65 dBZ */
+    #ffffff 100%  /* 70+ dBZ Hail core */
+  );
+}
+
+/* Pulsing beacon animations */
+@keyframes beaconPulse {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  50% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+
+.beacon-ring {
+  animation: beaconPulse 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
